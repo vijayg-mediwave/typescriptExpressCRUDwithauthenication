@@ -25,7 +25,7 @@ app.use("/api/recipi", recipiController);
 
 //ERROR HANDLING
 app.use((err:any, req:any, res:any, next:any) => {
-    winstonLogger.error("===========",err)
+    winstonLogger.error(err)
     //winstonLogger.info("logger",err)
     if (err.message == "jwt expired") {
       return res.status(403).send({
