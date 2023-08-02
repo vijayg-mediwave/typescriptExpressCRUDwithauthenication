@@ -2,12 +2,12 @@ import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 import expressWinston  from "express-winston";
-import winstonLogger from "./winston/logger"; // Assuming "./winston/logger" exports the winston logger instance
+import winstonLogger from "./winston/logger";
 const dbConnection = require('./db.connection/dbconnection')
 const app = express();
 const userController = require("./controller/user.controller");
 const recipiController = require("./controller/recipi_menu.controller")
-const port: number = parseInt(process.env.PORT || "3000"); // Use a default port (e.g., 3000) if PORT is not set in the environment
+const port: number = parseInt(process.env.PORT || "3000");
 dotenv.config();
 app.use(helmet());
 
@@ -16,7 +16,7 @@ app.use(express.json());
 
 // winston logger
 app.use(expressWinston.logger({
-    winstonInstance: winstonLogger, // Use the winston logger instance for logging
+    winstonInstance: winstonLogger,
 }));
 
 //router connection
