@@ -26,6 +26,8 @@ router.get("/",async(req:any,res:any,next:any)=>{
 })
 
 router.get("/:recipeid",checkForUser,async(req:any,res:any,next:any)=>{
+    console.log("aksdjalskdjlLKJLKSJLKAJLksj");
+    
     const id = req.params.recipeid
     try {
         const getRecipe = await db.recipe_menu.findOne({
