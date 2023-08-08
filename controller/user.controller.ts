@@ -3,11 +3,12 @@ import db from "../models";
 const router = express.Router()
 const argon2 = require("argon2")
 const {makeToken}= require("../utils")
+const {checkForUser} = require('../middileware/auth.middleware')
 
 
 
 
-router.post("/login",async(req:any,res:any,next:any)=>{
+ router.post("/login",async(req:any,res:any,next:any)=>{
     
     try {
         const user = await db.User.findOne({
@@ -86,6 +87,23 @@ router.post("/login",async(req:any,res:any,next:any)=>{
      } catch (error) {
          next(error);   
      }
-    })
+  })
+
+  router.get("/info", checkForUser, async(req:any,res:any,next:any)=> {
+    try {
+      const userInfo = await db.User.findOne({
+        where: {
+          id: res.locals.user,
+        },
+        attributes: ["id", "name"],
+      });
+      const json = JSON.parse(JSON.stringify(userInfo));
+      return res.status(200).send({ ...json });
+    } catch (error) {
+      return next(error);
+    }
+  })
+
+  
 
 module.exports = router
