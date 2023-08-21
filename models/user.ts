@@ -6,6 +6,7 @@ type UserAttributes = {
   name: string,
   email: string,
   password: string,
+  Password_reset:string
   // other attributes...
 };
 
@@ -16,6 +17,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     name!: string;
     email!: string;
     password!: string;
+    Password_reset!:string
     // static associate(models: any) {
    
     // }
@@ -39,6 +41,10 @@ module.exports = (sequelize:any, DataTypes:any) => {
     password: {
       type:DataTypes.STRING,
       allowNull: false
+    },
+    Password_reset: {
+      type:DataTypes.STRING,
+      defaultValue:'',
     },
   }, {
     sequelize,

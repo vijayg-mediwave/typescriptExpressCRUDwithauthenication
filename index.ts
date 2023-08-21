@@ -1,11 +1,12 @@
 import dotenv from "dotenv";
-import express from "express";
+import express from 'express';
 import helmet from "helmet";
 import expressWinston  from "express-winston";
 import winstonLogger from "./winston/logger";
 const dbConnection = require('./db.connection/dbconnection')
 const userController = require("./controller/user.controller");
 const recipiController = require("./controller/recipi_menu.controller")
+const forgotPassword = require("./controller/forgot_password")
 const port: number = parseInt(process.env.PORT || "3000");
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(expressWinston.logger({
 //router connection
 app.use("/api/user", userController);
 app.use("/api/recipi", recipiController);
+app.use("/api/forgot-password",forgotPassword);
 
 //ERROR HANDLING
 app.use((err:any, req:any, res:any, next:any) => {
