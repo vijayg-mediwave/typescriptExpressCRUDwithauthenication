@@ -58,8 +58,6 @@ router.post('/', async (req: Request, res: Response, next) => {
   }
 });
 
-
-
 router.post('/reset-password/:userid?', async (req: Request, res: Response, next) => {
   try {
     const user = await db.User.findOne({
@@ -82,6 +80,10 @@ router.post('/reset-password/:userid?', async (req: Request, res: Response, next
       user.Password_reset = ''
     }
 
+    if (!req.body.password) {
+      res.send("please enter your new password");
+    }
+    
     await user.save()
     res.send("password reset sucessfully.");
   } catch (error) {
