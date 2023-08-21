@@ -47,7 +47,7 @@ router.post('/', async (req: Request, res: Response, next) => {
       from: 'vijay_g@mindwaveventures.com',
       to: req.body.email,
       subject: 'Rest Password',
-      text: `click this link to change your password http://localhost:7000/api/forgot-password/reset-password/${user.id}?${token}`,
+      text: `click this link to change your password ${process.env.BASE_URL}/forgot-password/reset-password/${user.id}?${token}`,
     };
 
     await sendEmail(mailOptions);
